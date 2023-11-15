@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -46,12 +47,14 @@ def movinfo():
     cur.execute('''SELECT * FROM moviesinfo''') 
   
     # Fetch the data 
-    data = cur.fetchall() 
-  
+    data = cur.fetchall()
+    print(type(data))
     # close the cursor and connection 
     cur.close() 
-    conn.close() 
-
+    conn.close()
+    columns = ["title", "releasedate", "genre", "rating", "votes", "revenue"] 
+    data = pd.DataFrame(data, columns=columns)
+    data = data.to_json(orient='records')
     return jsonify(data)
 
 @app.route("/api/v1.0/ratingpergenre")
@@ -64,7 +67,8 @@ def ratinggenre():
     cur.execute('''SELECT * FROM ratingpergenre''') 
   
     # Fetch the data 
-    data = cur.fetchall() 
+    data = cur.fetchall()
+
 
     # close the cursor and connection 
     cur.close() 
