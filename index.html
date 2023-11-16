@@ -4,22 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dropdown Events</title>
+    <title>Movie Revenue Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <h2>Movie Revenue Analysis</h2>
-    <p>Numbers on hover reflect the rounded USD (in millions) spent in each category in 2017.</p>
-    <select id="selDataset">
-        <option value="Is movie's revenue dependent on the ratings it earns?">Is movie's revenue dependent on the ratings it earns?</option>
-        <option value="Is the count of votes a key factor towards a movie's ratings?">Is the count of votes a key factor towards a movie's ratings?</option>
-        <option value="Are there some genres that earn higher despite receiving lesser votes or ratings?">Are there some genres that earn higher despite receiving lesser votes or ratings?</option>
-        <option value="Is there a correlation between a movie's ratings and revenue and count of votes and revenue?">Is there a correlation between a movie's ratings and revenue and count of votes and revenue?</option>
-    </select>
-
+    <p>Is movie's revenue dependent on the ratings it earns?</p>
+    
+    <div id="bar"></div>
     <div id="plot"></div>
-
     <script src="plots.js"></script>
 </body>
 </html>

@@ -1,44 +1,71 @@
 const url = "http://127.0.0.1:5000/api/v1.0/moviesinfo";
+let ratinglist = [];
+let revenlist = [];
 
-// Fetch the JSON data and console log it
-d3.json(url).then(function(data) {
-  console.log(data);
-});
+// Define function
+function init() {
+    
+  // Fetch the JSON data and console log it
+  d3.json(url).then(function(data) {
 
-// Create an array of each country's numbers
-let ratings = Object.values(data.rating);
-let revenue = Object.values(data.revenue);
+        // console.log(data);
+      movinfo = data.moviedata;
+      ratinglist = movinfo.rating;
+    // Loop through the array of films
+    //   for (let i = 0; i < movinfo.length; i++) {
+    
+    // // Store the data at index `i` for evaluation
+    //     row = movinfo[i];
+    //     ratinglist.push(row.rating);
+    //     revenlist.push(row.revenue);
+    // }
+    console.log(ratinglist)
+// Trace data for the bar chart
+    let trace = [{
+    x: ratinglist,
+    y: revenlist,
+    text: revenlist,
+    type: "bar",
+    marker: {
+      color: "rgb(160,178,239)"
+    },
+    orientation: "h"
+    }];
 
-// Create an array of category labels
-let labels = Object.keys(data.title);
+// Use Plotly to plot the data in a bar chart
+  Plotly.newPlot("bar", trace);
+  });
 
-let trace1 = {
-  x: ratings,
-  y: revenue
-};
+  let trace1 = {
+    x: ratinglist,
+    y: revenlist
+  };
 
-let data1 = [trace1];
+  let datadisp = [trace1];
 
-let layout = {
-  title: "A Plotly plot"
-};
+  let layout = {
+    title: "Movie Revenue Plot"
+  };
 
-Plotly.newPlot("plot", data, layout);
-// Display the default plot
-// function init() {
-//   let data = [{
-//     values: australia,
-//     labels: labels,
-//     type: "pie"
-//   }];
+  Plotly.newPlot("plot", datadisp, layout);
 
-//   let layout = {
-//     height: 600,
-//     width: 800
-//   };
+  let trace = {
+    x: ratinglist,
+    y: revenlist,
+    type: "bar"
+  };
 
-//   Plotly.newPlot("pie", data, layout);
-// }
+  let trace2 = {
+    x: ratinglist,
+    y: revenlist,
+    type: "scatter"
+  };
 
+// The data array consists of both traces
+  let data2 = [trace, trace2];
 
-// init();
+// Note that we omitted the layout object this time
+// This will use default parameters for the layout
+  Plotly.newPlot("plot", data2);
+}
+init();

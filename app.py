@@ -7,13 +7,14 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask_cors import CORS
 import psycopg2
 
 #################################################
 # Flask Setup
 #################################################
 app = Flask(__name__)
-
+CORS(app)
 # Connect to the database 
 conn = psycopg2.connect(database="MoviesData", user="postgres", 
                         password="postgres", host="localhost", port="5432") 
@@ -54,8 +55,7 @@ def movinfo():
     conn.close()
     columns = ["title", "releasedate", "genre", "rating", "votes", "revenue"] 
     data = pd.DataFrame(data, columns=columns)
-    data = data.to_json(orient='records')
-    return jsonify(data)
+    return jsonify({"moviedata":data.to_json(orient='records')})
 
 @app.route("/api/v1.0/ratingpergenre")
 def ratinggenre():
