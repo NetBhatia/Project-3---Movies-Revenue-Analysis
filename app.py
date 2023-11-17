@@ -22,7 +22,9 @@ conn = psycopg2.connect(database="MoviesData", user="postgres",
 #################################################
 # Flask Routes
 #################################################
-
+@app.route("/home")
+def home():
+    return render_template("index.html")
 @app.route("/")
 def welcome():
     
