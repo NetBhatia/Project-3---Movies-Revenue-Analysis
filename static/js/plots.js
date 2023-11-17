@@ -1,5 +1,5 @@
 const url = "http://127.0.0.1:5000/api/v1.0/moviesinfo";
-let ratinglist = []; //remember to change this to array
+let ratinglist = []; 
 let revenlist = [];
 
 // Define function
@@ -9,7 +9,7 @@ function init() {
   d3.json(url).then(function(data) {
 
     movinfo = typeof data.moviedata === 'string' ? JSON.parse(data.moviedata) : data.moviedata;
-      // ratinglist = movinfo[1].rating;
+    
     // Loop through the array of films
        for (let i = 0; i < movinfo.length; i++) {
     
@@ -48,9 +48,6 @@ function init() {
     marker: {
       color: "rgb(160,178,239)"
   }}];
- 
-  // let datadisp = [trace1];
-
   
   let layout = {
     title: "Movie Revenue Histogram Graph"
@@ -58,23 +55,7 @@ function init() {
 
   Plotly.newPlot("plot", trace1, layout);
 
-
-  // let trace3 = [{
-  //   x: ratinglist,
-  //   y: revenlist,
-  //   text: revenlist,
-  //   type: "line",
-  //   marker: {
-  //     color: "black"
-  // }}];
-
-
-  // let layout1 = {
-  //   title: "Movie Revenue Line Chart"
-  // };
-
-  // Plotly.newPlot("newPlot", trace3, layout1);
-
+  // Create Bar chart & Scatter plot
   let trace4 = {
     x: ratinglist,
     y: revenlist,
